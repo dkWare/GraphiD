@@ -262,8 +262,9 @@ class UIField:
             ui_manager (UIManager, optional): If you want to register it automatically. Defaults to None.
             other_form (bool, optional): This is used internal. Defaults to False.
         """
-        if other_form:
+        if other_form: #used the alternative constructor
             return
+
         self._create_point_list(pointA, pointB, pointC, pointD)
         self._init_values(id)
         self._try_register(ui_manager)
@@ -333,40 +334,57 @@ class UIField:
         if it has entered call the on_mouse_enters and if the mouse has left call
         the on_mouse_leaves method
         """
-        if not self._field_active:
+        if not self._field_active: #field is not active
             return
 
-        if self._field_locked:
+        if self._field_locked: #field is locked
             return
 
-        self.on_update()
 
+        #check if mouse is in field and use it to get the action if muse has entered left to call the representing event
         new_mouse_pointer_in_field = self._position_over_field(self._mouse_pointer, pointA=self._point_list[0], pointC=self._point_list[2])
-
         mouse_leaves_field, mouse_enters_field = self._get_flag_change(self._mouse_pointer_in_field, new_mouse_pointer_in_field)
 
-        if mouse_enters_field and self._listen_for_mouse_enter_event:
+        if mouse_enters_field and self._listen_for_mouse_enter_event: #mouse has entered the field
             if self.debug: write_log("mouse enters field", self._id, 100)
             self.on_mouse_enters()
 
-        if mouse_leaves_field and self._listen_for_mouse_leave_event:
+        if mouse_leaves_field and self._listen_for_mouse_leave_event: #mouse has left the field
             if self.debug: write_log("mouse leaves field", self._id, 100)
             self.on_mouse_leaves()
 
+        #if none of the if statements above then the mouse is outside or is still in the field
+
+        #call the update event
+        self.on_update()
+
+        #save the current mouse flag to detect changes in an later try
         self._mouse_pointer_in_field = new_mouse_pointer_in_field
 
     def draw(self):
         """
-        Draws the Field
+        Draws the Field only if the field is visible.
+        The field can have 3 states:
+        (event, default color)
+         - mouse in field: arcade.color.DARK_GREEN
+         - mouse not in field: arcade.color.RED
+         - mouse pressed field: arcade.color.GREEN
+         - field locked: arcade.color.DARK_RED
+
+        for every state you can change the color:
+         - set_color_masked
+         - set_color_unmasked
+         - set_color_pressed
+         - set_color_locked
         """
-        if not self._field_visible:
+        if not self._field_visible: #the field is not visible
             return
 
-        if self._field_locked:
+        if self._field_locked: #field is locked
             color = self._color_field_locked
-        elif self._mouse_press_on_field:
+        elif self._mouse_press_on_field: #field is being pressed
             color = self._color_pressed
-        else:
+        else: #mark field so that its unmarked or marked
             color = self._color_unmasked if not self._mouse_pointer_in_field and not self._mouse_click_visual_overwrite else self._color_masked
         arcade.draw_polygon_filled(self._point_list_raw, color)
 
@@ -378,121 +396,157 @@ class UIField:
 
     def raise_click_event_press(self, button: int):
         """
-        Aktualisiert den Zustand des Feldes basierend auf der Maus-Eingabe.
-
-        Prüft, ob der Mauszeiger sich innerhalb des Feldes befindet und ruft bei
-        einem Mausklick die `on_button_press` Methode auf.
+        Call this method to raise an click event.
+        It checks if the mouse is in the field and
+        raises an button_press event.
 
         Args:
-            button (int): Die Nummer des Mausklicks.
-
-        Returns:
-            None
+            button (int): The button that is being used to press the Mouse
         """
-        if not self._field_active:
+        if not self._field_active: #field is not active
             return
 
-        if self._field_locked:
+        if self._field_locked: #field is locked
             return
 
-        if self._mouse_pointer_in_field:
+        if self._mouse_pointer_in_field: #mouse is in field
             if self.debug: write_log(f"mouse press field: {button}", self._id, 100)
+            #set to true to detect later the release event even if mouse leaves the field
             self._mouse_press_on_field = True
             self.on_button_press(button)
 
     def raise_click_event_release(self, button: int):
         """
-        Aktualisiert den Zustand des Feldes basierend auf der Maus-Eingabe.
-
-        Prüft, ob der Mauszeiger sich innerhalb des Feldes befindet und ruft bei
-        einem Mausklick die `on_button_press` Methode auf.
+        Call this method to raise an click event.
+        It checks if the mouse is in the field and
+        raises an button_release event.
 
         Args:
-            button (int): Die Nummer des Mausklicks.
-
-        Returns:
-            None
+            button (int): The button that is being used to press the Mouse
         """
-        if not self._field_active:
+        if not self._field_active: #field is not active
             return
 
-        if self._field_locked:
+        if self._field_locked: #field is locked
             return
 
+        #if this is true the event can be raised even outside the field
+        #it is False so that the user can set it so it can or it can not
+        #be raised outside the field
         release_event_overwrite = False
 
         if self.release_event_outside_field and self._mouse_press_on_field:
+            #button was pressed, the mouse button got released and the user lets
+            #raise the event outside the field
             release_event_overwrite = True
 
         if self._mouse_pointer_in_field or release_event_overwrite:
+            #the mouse button gets released in or outside the field
+            #with self._mouse_pointer_in_field we check if the mouse is in the field
+            #bzw if release_event_overwrite is True we realest the button outside the field
             if self.debug: write_log(f"mouse release field: {button}", self._id, 100)
             self.on_button_release(button)
             self._mouse_press_on_field = False
 
     def on_mouse_enters(self):
         """
-        Diese Methode wird aufgerufen, wenn der Mauszeiger in das UI-Element eintritt.
+        This event gets called when the mouse enters this field
         """
 
     def on_mouse_leaves(self):
         """
-        Diese Methode wird aufgerufen, wenn der Mauszeiger das UI-Element verlässt.
+        This event gets called when the mouse leaves this field
         """
 
-    def on_button_press(self, button):
+    def on_button_press(self, button: int):
         """
-        Diese Methode wird aufgerufen, wenn eine Maustaste auf dem UI-Element gedrückt wird.
+        This event gets called when the mouse button is over this field.
+        And pressed on the field, you get witch button is being pressed
+        in form of an int:
+         - arcade.MOUSE_BUTTON_LEFT: 1
+         - arcade.MOUSE_BUTTON_MIDDLE: 2
+         - arcade.MOUSE_BUTTON_RIGHT: 4
 
-        Parameter:
-        -----------
-        button: int
-            Die ID der gedrückten Maustaste.
+        Args:
+            button (int): the button that was used by the user
         """
 
-    def on_button_release(self, button):
+    def on_button_release(self, button: int):
         """
-        Diese Methode wird aufgerufen, wenn eine Maustaste auf dem UI-Element gedrückt wird.
+        This event gets called when the mouse button is over this field.
+        And the button gets released on the field or nearby, you get witch
+        button is being pressed in form of an int:
+         - arcade.MOUSE_BUTTON_LEFT: 1
+         - arcade.MOUSE_BUTTON_MIDDLE: 2
+         - arcade.MOUSE_BUTTON_RIGHT: 4
 
-        Parameter:
-        -----------
-        button: int
-            Die ID der gedrückten Maustaste.
+        Args:
+            button (int): the button that was used by the user
         """
 
     def on_unlock(self):
-        """UNLOCK"""
+        """
+        This event gets called when this field gets unlocked
+        """
 
     def on_lock(self):
-        """LOCK"""
+        """
+        This event gets called when this field gets locked
+        """
 
     def on_activate(self):
-        """ACTIVATE"""
+        """
+        This event gets called when this field gets activated
+        """
 
     def on_deactivate(self):
-        """DEACTIVATE"""
+        """
+        This event gets called when this field gets deactivated
+        """
 
     def on_hide(self):
-        """HIDE"""
+        """
+        This event gets called when this field gets hidden
+        """
 
     def on_visible(self):
-        """VISIBLE AGAIN"""
+        """
+        This event gets called when this field gets shown
+        """
 
     def on_update(self):
         """
-        Diese Methode wird vor jedem update aufgerufen wenn das feld active ist und nicht gelocked
+        This event gets called after this field gets updated
         """
 
     def activate(self):
+        """
+        a short cut to set the field visible and active. it also raises both events:
+         - on_activate
+         - on_visible
+        """
         self._field_visible = True
         self._field_active = True
         self.on_activate()
+        self.on_visible()
 
     def deactivate(self):
+        """
+        a short cut to set the field visible and active. it also raises both events:
+         - on_deactivate
+         - on_hide
+        """
         self._field_visible = False
         self._field_active = False
         self.on_deactivate()
+        self.on_hide()
 
     def set_visible(self, x: bool):
+        """
+        This method sets the visibility of this field:
+        it also calls on_hide or on_visible when you set it invisible
+        or visible
+        """
         show, hide = self._get_flag_change(self._field_visible, x)
         if hide:
             self.on_hide()
@@ -501,6 +555,12 @@ class UIField:
         self._field_visible = x
 
     def set_active(self, x: bool):
+        """
+        This method sets the active or deactivate.
+        it also calls:
+         - on_activate
+         - on_deactivate
+        """
         deactivate, activate = self._get_flag_change(self._field_active, x)
         if activate:
             self.on_activate()
