@@ -2,10 +2,9 @@ from math import isclose, sqrt
 from typing import overload
 from numpy import clip
 import arcade
+import debuger
 
-
-def write_log(action, id, code):
-    print(f"[{id}] <{code}> {action}")
+dbg = debuger.log
 
 
 class Vector2D:
@@ -118,6 +117,7 @@ class UIManager:
         field.register_mouse(self._mouse_pointer)
         self.field_list.append(field)
         self.field_dict[field.ID] = field
+        dbg.debug(f"REGISTERED field: <\"{field.ID}\">")
 
     def draw(self):
         """
@@ -142,6 +142,7 @@ class UIManager:
 
         button: int the pressed button
         """
+        dbg.info("MOUSE PRESS EVENT start iterating all fields")
         for field in self.field_list:
             field.raise_click_event_press(button)
 
@@ -152,14 +153,15 @@ class UIManager:
 
         button: int the released button
         """
+        dbg.info("MOUSE RELEASE EVENT start iterating all fields")
         for field in self.field_list:
             field.raise_click_event_release(button)
 
     def __getitem__(self, name):
+        dbg.warning(f"USED GETITEM TO GET \"{name}\". THIS WILL BE REMOVED")
         if name in self.field_dict:
             return self.field_dict[name]
-        else:
-            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
 class UIField:
     def _find_center(self, pointA: Vector2D, pointC: Vector2D):
@@ -186,6 +188,7 @@ class UIField:
         self._center_x = pointA.valA + self._half_width
         self._center_y = pointA.valB - self._half_height
         self._centerPos = Vector2D(self._center_x, self._center_y)
+        dbg.info(f"FOUND CENTER: x: {self._center_x} y: {self._center_y}")
 
     def _create_point_list(self, pointA: Vector2D, pointB: Vector2D, pointC: Vector2D, pointD: Vector2D):
         """
@@ -205,6 +208,7 @@ class UIField:
             return
         self._point_list_raw = [point.values for point in point_list]
         self._point_list = point_list
+        dbg.info("successfully built point list")
         self._find_center(pointA, pointC)
 
     def _init_values(self, id: str):
@@ -246,6 +250,7 @@ class UIField:
         #Check if its not already exists
         #so that it wont overwrite in future cases
         if not hasattr(self, "_mouse_pointer"):
+            dbg.warning("MOUSE POINTER MAY BE OVERWRITTEN")
             self._mouse_pointer = None
 
     def register_mouse(self, mouse: MousePointer):
@@ -345,13 +350,13 @@ class UIField:
 
     def change_position_rel(self, dx: float=0, dy: float=0):
         self._point_list_raw.clear()
-        print(self._point_list)
         for point in self._point_list:
             point: Vector2D
             point += dx, dy
             self._point_list_raw.append(point.values)
         self._find_center(self._point_list[0], self._point_list[2])
         self.on_position_change(Vector2D(dx, dy))
+        dbg.info(f"CHANGED POS BY dx: {dx} dy: {dy} to x: {self._center_x} y: {self._center_y}")
 
     def update_field(self):
         """
@@ -373,11 +378,11 @@ class UIField:
         mouse_leaves_field, mouse_enters_field = self._get_flag_change(self._mouse_pointer_in_field, new_mouse_pointer_in_field)
 
         if mouse_enters_field and self._listen_for_mouse_enter_event: #mouse has entered the field
-            if self.debug: write_log("mouse enters field", self._id, 100)
+            dbg.info(f"[{self._id} mouse has entered the field]")
             self.on_mouse_enters()
 
         if mouse_leaves_field and self._listen_for_mouse_leave_event: #mouse has left the field
-            if self.debug: write_log("mouse leaves field", self._id, 100)
+            dbg.info(f"[{self._id} mouse has left the field]")
             self.on_mouse_leaves()
 
         #if none of the if statements above then the mouse is outside or is still in the field
@@ -437,7 +442,7 @@ class UIField:
             return
 
         if self._mouse_pointer_in_field: #mouse is in field
-            if self.debug: write_log(f"mouse press field: {button}", self._id, 100)
+            dbg.info(f"[{self._id} mouse has press on field]")
             #set to true to detect later the release event even if mouse leaves the field
             self._mouse_press_on_field = True
             self.on_button_press(button)
@@ -471,7 +476,7 @@ class UIField:
             #the mouse button gets released in or outside the field
             #with self._mouse_pointer_in_field we check if the mouse is in the field
             #bzw if release_event_overwrite is True we realest the button outside the field
-            if self.debug: write_log(f"mouse release field: {button}", self._id, 100)
+            dbg.info(f"[{self._id} mouse has released the field]")
             self.on_button_release(button)
             self._mouse_press_on_field = False
 
@@ -564,6 +569,7 @@ class UIField:
         self._field_active = True
         self.on_activate()
         self.on_visible()
+        dbg.warning(f"[{self._id}] got activated")
 
     def deactivate(self):
         """
@@ -575,6 +581,7 @@ class UIField:
         self._field_active = False
         self.on_deactivate()
         self.on_hide()
+        dbg.warning(f"[{self._id}] got deactivated")
 
     def set_visible(self, x: bool):
         """
@@ -584,8 +591,10 @@ class UIField:
         """
         show, hide = self._get_flag_change(self._field_visible, x)
         if hide:
+            dbg.warning.info(f"[{self._id}] invisible")
             self.on_hide()
         else:
+            dbg.warning.info(f"[{self._id}] visible")
             self.on_visible()
         self._field_visible = x
 
@@ -598,18 +607,20 @@ class UIField:
         """
         deactivate, activate = self._get_flag_change(self._field_active, x)
         if activate:
+            dbg.warning.info(f"[{self._id}] activate")
             self.on_activate()
         else:
+            dbg.warning(f"[{self._id}] deactivate")
             self.on_deactivate()
         self._field_active = x
 
     def set_locked(self, x: bool):
         unlock, lock = self._get_flag_change(self._field_locked, x)
         if lock:
-            if self.debug: write_log("field locked", self._id, 100)
+            dbg.warning(f"[{self._id}] locked")
             self.on_lock()
         else:
-            if self.debug: write_log("field unlocked", self._id, 100)
+            dbg.warning(f"[{self._id}] unlocked")
             self.on_unlock()
         self._field_locked = x
         if x:
