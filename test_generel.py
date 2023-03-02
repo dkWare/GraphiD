@@ -24,7 +24,8 @@ class Button(ui.RectButton):
             else:
                 button.set_locked(True)
         elif self.ID == "move":
-            self.change_position(10, 10)
+            move = (10, 10) if button == 1 else (-10, 10)
+            self.change_position(*move)
 
     def on_button_release(self, button):
         if self.ID == "SEC":

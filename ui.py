@@ -9,27 +9,28 @@ def write_log(action, id, code):
 
 
 class Vector2D:
-    """
-    This Class represents a simple two dimensional Vector
-    It has two values:
-
-     - a: float | int
-     - b: float | int
-
-    ## properties
-    you can get the values separate by using:
-     - @valA for the content of a
-     - @valB for the content of b
-    or both in a tuple by using:
-     - @values
-    """
     def __init__(self, a: float, b: float):
+        """
+        This Class represents a simple two dimensional Vector
+        It has two values:
+
+        - a: float | int
+        - b: float | int
+
+        ## properties
+        you can get the values separate by using:
+        - @valA for the content of a
+        - @valB for the content of b
+        or both in a tuple by using:
+        - @values
+        """
         self._a = a
         self._b = b
 
     def __add__(self, other: tuple):
         self._a += other[0]
         self._b += other[1]
+        return self
 
     @property
     def valA(self):
@@ -42,8 +43,6 @@ class Vector2D:
     @property
     def values(self):
         return self._a, self._b
-
-Vector2D.__mro__
 
 
 class MousePointer(Vector2D):
@@ -73,34 +72,34 @@ class MousePointer(Vector2D):
 
 
 class UIManager:
-    """
-    This class is a shortcut to not have to use these methods on every single element.
-    And for example to shorten 80 lines in 4 for 20 elements.
-
-    ## register
-    use the register method to regress single elements. You can also pass an instance of
-    this manager either directly when creating the element from a predefined class or also
-    pass an instance at super.__init__ for your own classes that inherit from one of the predefined
-    classes. if you do one of the two above you don't have to use this method on the named object
-    or on all created objects of this class.
-
-    ## draw
-    this method calls the function with the same name for all regressed elements
-
-    ## update
-    with this method the function with the same name is called for all regressed elements
-
-    ## raise_click_event_press
-    with this method the function with the same name is called for all regressed elements
-
-    ## raise_click_event_release
-    this method calls the function with the same name for all regressed elements
-
-    ## getitem
-    You can access individual elements by accessing them with their ID:
-    gui_manager_object[element_id]
-    """
     def __init__(self, mouse_pointer: MousePointer, *fields):
+        """
+        This class is a shortcut to not have to use these methods on every single element.
+        And for example to shorten 80 lines in 4 for 20 elements.
+
+        ## register
+        use the register method to regress single elements. You can also pass an instance of
+        this manager either directly when creating the element from a predefined class or also
+        pass an instance at super.__init__ for your own classes that inherit from one of the predefined
+        classes. if you do one of the two above you don't have to use this method on the named object
+        or on all created objects of this class.
+
+        ## draw
+        this method calls the function with the same name for all regressed elements
+
+        ## update
+        with this method the function with the same name is called for all regressed elements
+
+        ## raise_click_event_press
+        with this method the function with the same name is called for all regressed elements
+
+        ## raise_click_event_release
+        this method calls the function with the same name for all regressed elements
+
+        ## getitem
+        You can access individual elements by accessing them with their ID:
+        gui_manager_object[element_id]
+        """
         self.field_list = []
         self.field_dict = {}
         for field in fields:
@@ -163,6 +162,31 @@ class UIManager:
             raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
 class UIField:
+    def _find_center(self, pointA: Vector2D, pointC: Vector2D):
+        """
+        Calculates the following values:
+         - width (float) the width of this field
+         - height (float) the height of this field
+         - size (Vector2D) it contains the width and height
+
+         - center_x (float) the center position on x
+         - center_y (float) the center position on y
+         - centerPos (Vector2D) it contains the center position
+
+        Args:
+            pointA (Vector2D): The point from the fields upper left
+            pointC (Vector2D): The point from the fields lower right
+        """
+        self._width = pointA.valA - pointC.valA
+        self._height = pointA.valB - pointC.valB
+        self._half_width = self._width / 2
+        self._half_height = self._height / 2
+        self._size = Vector2D(self._width, self._height)
+
+        self._center_x = pointA.valA + self._half_width
+        self._center_y = pointA.valB - self._half_height
+        self._centerPos = Vector2D(self._center_x, self._center_y)
+
     def _create_point_list(self, pointA: Vector2D, pointB: Vector2D, pointC: Vector2D, pointD: Vector2D):
         """
         method to create the required point_list and point_list_raw
@@ -181,6 +205,7 @@ class UIField:
             return
         self._point_list_raw = [point.values for point in point_list]
         self._point_list = point_list
+        self._find_center(pointA, pointC)
 
     def _init_values(self, id: str):
         """
@@ -312,15 +337,21 @@ class UIField:
             return True, False
         return False, False
 
-    @overload
     def change_position(self, x: float, y: float):
-        ...
+        point = self._point_list[0]
+        dx = point.valA - x
+        dy = point.valB - y
+        self.change_position_rel(dx, dy)
 
-    def change_position(self, dx: float=0, dy: float=0):
+    def change_position_rel(self, dx: float=0, dy: float=0):
         self._point_list_raw.clear()
+        print(self._point_list)
         for point in self._point_list:
+            point: Vector2D
             point += dx, dy
             self._point_list_raw.append(point.values)
+        self._find_center(self._point_list[0], self._point_list[2])
+        self.on_position_change(Vector2D(dx, dy))
 
     def update_field(self):
         """
@@ -515,6 +546,14 @@ class UIField:
         This event gets called after this field gets updated
         """
 
+    def on_position_change(self, delta_position: Vector2D):
+        """
+        This event gets called after the position of this field changes
+
+        Args:
+            delta_position (Vector2D): The change in Position Vector2D(dx, dy)
+        """
+
     def activate(self):
         """
         a short cut to set the field visible and active. it also raises both events:
@@ -649,17 +688,17 @@ class RectButton(UIField):
         if text_dy is None:
             text_dy = self._text_dy
 
-        half_width = width/2
-        half_height = height/2
+        self._half_width = width/2
+        self._half_height = height/2
 
-        point_a = Vector2D(center_x-half_width, center_y)
-        point_b = Vector2D(center_x+half_width, center_y)
-        point_c = Vector2D(center_x+half_width, center_y-half_height)
-        point_d = Vector2D(center_x-half_width, center_y-half_height)
+        point_a = Vector2D(center_x-self._half_width, center_y)
+        point_b = Vector2D(center_x+self._half_width, center_y)
+        point_c = Vector2D(center_x+self._half_width, center_y-self._half_height)
+        point_d = Vector2D(center_x-self._half_width, center_y-self._half_height)
         self._create_point_list(point_a, point_b, point_c, point_d)
 
-        self._text_x = center_x-half_width+text_dx
-        self._text_y = center_y-half_height+text_dy
+        self._text_x = center_x-self._half_width+text_dx
+        self._text_y = center_y-self._half_height+text_dy
 
         self._centerPos = Vector2D(center_x, center_y)
 
@@ -669,17 +708,13 @@ class RectButton(UIField):
         if dx != 0 or dy != 0:
             self.on_position_change(self._centerPos)
 
+    def _set_text_pos(self):
+        self._text_x = self._center_x-self._half_width+self._text_dx
+        self._text_y = self._center_y-self._half_height+self._text_dy
 
     def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, text: str, text_size: int, text_dx: float, text_dy: float, ui_manager: UIManager=None, release_event_outside_field:bool=False):
-        self._center_x = center_x
-        self._center_y = center_y
-        self._width = width
-        self._height = height
-        self._text_dx = text_dx
-        self._text_dy = text_dy
-
-        half_width = width/2
-        half_height = height/2
+        half_width = width / 2
+        half_height = height / 2
 
         point_a = Vector2D(center_x-half_width, center_y)
         point_b = Vector2D(center_x+half_width, center_y)
@@ -687,17 +722,19 @@ class RectButton(UIField):
         point_d = Vector2D(center_x-half_width, center_y-half_height)
         super().__init__(id, pointA=point_a, pointB=point_b, pointC=point_c, pointD=point_d)
 
-        self._text_x = center_x-half_width+text_dx
-        self._text_y = center_y-half_height+text_dy
-
         self.text = text
         self._text_size = text_size
 
-        self._centerPos = Vector2D(center_x, center_y)
-        self._size = Vector2D(width, height)
+        self._text_dx = text_dx
+        self._text_dy = text_dy
+        self._set_text_pos()
 
         if ui_manager:
             ui_manager.register(self)
+
+    def change_position(self, dx: float=0, dy: float=0):
+        super().change_position_rel(dx, dy)
+        self._set_text_pos()
 
     def draw(self):
         if not self._field_visible:
@@ -705,95 +742,3 @@ class RectButton(UIField):
 
         super().draw()
         arcade.draw_text(self.text, self._text_x, self._text_y, font_size=self._text_size)
-
-    def on_position_change(self, new_position: Vector2D):
-        """Diese Methode wird bei änderung der posiotion aufgerufen"""
-
-
-class UIFieldCircle(UIField):
-    def __init__(self, id: str, *, centerPos: Vector2D, radius: float, ui_manager: UIManager=None):
-        super().__init__(id)
-
-        if ui_manager:
-            ui_manager.register(self)
-
-        self._centerPos = centerPos
-        self._radius = radius
-
-
-    def inArea(self, position: Vector2D, center: Vector2D, radius: float):
-        dx = position.valA - center.valA
-        dy = position.valB - center.valB
-        distance = sqrt(dx**2 + dy**2)
-        if distance > radius:
-            return False
-        return True
-
-    def detectChange(self, old: bool, new: bool):
-        if old == 0 and new == 1:
-            return False, True
-        if old == 1 and new == 0:
-            return True, False
-        return False, False
-
-    def update(self, mouse: MousePointer):
-        new_mouse_pointer_in_field = self.inArea(mouse, self._centerPos, self._radius)
-
-        mouse_leaves_field, mouse_enters_field = self.detectChange(self._mouse_pointer_in_field, new_mouse_pointer_in_field)
-
-        if mouse_enters_field:
-            if self.debug: write_log("mouse enters field", self._id, 100)
-            self.on_mouse_enters()
-
-        if mouse_leaves_field:
-            if self.debug: write_log("mouse leaves field", self._id, 100)
-            self.on_mouse_leaves()
-
-        self._mouse_pointer_in_field = new_mouse_pointer_in_field
-
-    def draw(self):
-        color = self._color_unmasked if not self._mouse_pointer_in_field else self._color_masked
-        arcade.draw_circle_filled(self._centerPos.valA, self._centerPos.valB, self._radius, color)
-
-
-class CircleButton(UIFieldCircle):
-    def __init__(self, id: str, *, center_x: float, center_y: float, radius: float, text: str, text_size: int, text_dx: float, text_dy: float, color_masked: arcade.Color, color_unmasked: arcade.Color, ui_manager: UIManager=None):
-        super().__init__(id, centerPos=Vector2D(center_x, center_y), radius=radius)
-
-        self._color_masked = color_masked
-        self._color_unmasked = color_unmasked
-
-        self._text = text
-
-        self._text_x = center_x-text_dx
-        self._text_y = center_y-text_dy
-        self._text_size = text_size
-
-        if ui_manager:
-            ui_manager.register(self)
-
-
-    def draw(self):
-        super().draw()
-        arcade.draw_text(self._text, self._text_x, self._text_y, font_size=self._text_size)
-
-
-class TextureButtom(RectButton):
-    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, text: str, text_size: int, text_dx: float, text_dy: float, texture_masked: str, texture_unmasked: str, scale: float, ui_manager: UIManager=None):
-        super().__init__(id, center_x=center_x, center_y=center_y, width=width, height=height, text=text, text_size=text_size, text_dx=text_dx, text_dy=text_dy, color_masked=None, color_unmasked=None)
-
-        self._texture_unmasked = arcade.load_texture(texture_unmasked)
-        self._texture_masked = arcade.load_texture(texture_masked)
-
-        if ui_manager:
-            ui_manager.register(self)
-
-    def draw(self):
-        texture = self._texture_unmasked if not self._mouse_pointer_in_field else self._texture_masked
-        arcade.draw_texture_rectangle(self._centerPos.valA, self._centerPos.valB, self._size.valA, self._size.valB, texture)
-
-        if not self.debug:
-            return
-
-        for index, point in enumerate(self._point_list):
-            arcade.draw_text(index, *point.values)
