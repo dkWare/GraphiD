@@ -23,6 +23,8 @@ class Button(ui.RectButton):
                 button.set_locked(False)
             else:
                 button.set_locked(True)
+        elif self.ID == "move":
+            self.change_position(10, 10)
 
     def on_button_release(self, button):
         if self.ID == "SEC":
@@ -60,6 +62,7 @@ class ChatWindow(arcade.Window):
         sec.set_color_masked(arcade.color.BLUEBONNET)
         sec.set_color_pressed(arcade.color.SKY_BLUE)
         sec.set_color_locked(arcade.color.BLUE_GRAY)
+        Button(self.gui_manager, 100, 300, "move", "MOVE ME", "YEAH")
 
     def button_event_lock(self, button_used):
         button = self.gui_manager["MoveButtonX"]

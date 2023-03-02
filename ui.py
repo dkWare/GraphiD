@@ -17,9 +17,6 @@ class Vector2D:
      - b: float | int
 
     ## properties
-    once created values can't be changed. It is immutable
-    you can check that if its immutable by using:
-     - @mutable
     you can get the values separate by using:
      - @valA for the content of a
      - @valB for the content of b
@@ -30,9 +27,9 @@ class Vector2D:
         self._a = a
         self._b = b
 
-    @property
-    def mutable(self):
-        return False
+    def __add__(self, other: tuple):
+        self._a += other[0]
+        self._b += other[1]
 
     @property
     def valA(self):
@@ -58,9 +55,6 @@ class MousePointer(Vector2D):
      - b: float | int
 
     ## properties
-    once created values can't be changed. It is mutable
-    you can check that if its mutable by using:
-     - mutable
     you can get the values separate by using:
      - @valA for the content of a
      - @valB for the content of b
@@ -72,10 +66,6 @@ class MousePointer(Vector2D):
     """
     def __init__(self, a: float, b: float):
         super().__init__(a, b)
-
-    @property
-    def mutable(self):
-        return True
 
     def change(self, a, b):
         self._a = a
@@ -229,8 +219,7 @@ class UIField:
 
         #Create Mouse Pointer Var for IDE
         #Check if its not already exists
-        #so that it wont overwrite in future
-        #cases
+        #so that it wont overwrite in future cases
         if not hasattr(self, "_mouse_pointer"):
             self._mouse_pointer = None
 
@@ -265,12 +254,11 @@ class UIField:
         if other_form: #used the alternative constructor
             return
 
-        self._create_point_list(pointA, pointB, pointC, pointD)
         self._init_values(id)
+        self._create_point_list(pointA, pointB, pointC, pointD)
         self._try_register(ui_manager)
 
-    @classmethod
-    def init_other_shape(cls, id: str, *, ui_manager: UIManager=None):
+    def __init_other__(self, id: str, *, ui_manager: UIManager=None):
         """
         Use this if you want to create a UIField thats
         shaped differently then a Rectangle.
@@ -281,10 +269,8 @@ class UIField:
             id (str): The ID of this field for debug uses
             ui_manager (UIManager, optional): If you want to register it automatically. Defaults to None.
         """
-        field = cls(other_form=True)
-        field._init_values(id)
-        field._try_register(ui_manager)
-        return field
+        self._init_values(id)
+        self._try_register(ui_manager)
 
     def _position_over_field(self, position: Vector2D, *, pointA: Vector2D, pointC: Vector2D):
         """
@@ -325,6 +311,16 @@ class UIField:
         if oldFlagState == 1 and newFlagState == 0:
             return True, False
         return False, False
+
+    @overload
+    def change_position(self, x: float, y: float):
+        ...
+
+    def change_position(self, dx: float=0, dy: float=0):
+        self._point_list_raw.clear()
+        for point in self._point_list:
+            point += dx, dy
+            self._point_list_raw.append(point.values)
 
     def update_field(self):
         """
