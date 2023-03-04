@@ -1,204 +1,47 @@
-from math import isclose, sqrt
-from typing import overload
-from numpy import clip
+from .utils import Vector2D as _Vector2D
+from .utils import MousePointer as _MousePointer
+from .manage import UIManager, UIGroup
 import arcade
-import debuger
+from .debugger import logger as dbg
+from .debugger import Tag as _debugger_tags
 
-dbg = debuger.log
-
-
-class Vector2D:
-    def __init__(self, a: float, b: float):
-        """
-        This Class represents a simple two dimensional Vector
-        It has two values:
-
-        - a: float | int
-        - b: float | int
-
-        ## properties
-        you can get the values separate by using:
-        - @valA for the content of a
-        - @valB for the content of b
-        or both in a tuple by using:
-        - @values
-        """
-        self._a = a
-        self._b = b
-
-    def __add__(self, other: tuple):
-        self._a += other[0]
-        self._b += other[1]
-        return self
-
-    @property
-    def valA(self):
-        return self._a
-
-    @property
-    def valB(self):
-        return self._b
-
-    @property
-    def values(self):
-        return self._a, self._b
-
-
-class MousePointer(Vector2D):
-    """
-    This Class represents the position off the Mouse
-    It has two values:
-
-     - a: float | int
-     - b: float | int
-
-    ## properties
-    you can get the values separate by using:
-     - @valA for the content of a
-     - @valB for the content of b
-    or both in a tuple by using:
-     - @values
-    ## methods
-    you can use the change method to change a and b:
-     - @change(new_a: float|int, new_b: float|int)
-    """
-    def __init__(self, a: float, b: float):
-        super().__init__(a, b)
-
-    def change(self, a, b):
-        self._a = a
-        self._b = b
-
-
-class UIManager:
-    def __init__(self, mouse_pointer: MousePointer, *fields):
-        """
-        This class is a shortcut to not have to use these methods on every single element.
-        And for example to shorten 80 lines in 4 for 20 elements.
-
-        ## register
-        use the register method to regress single elements. You can also pass an instance of
-        this manager either directly when creating the element from a predefined class or also
-        pass an instance at super.__init__ for your own classes that inherit from one of the predefined
-        classes. if you do one of the two above you don't have to use this method on the named object
-        or on all created objects of this class.
-
-        ## draw
-        this method calls the function with the same name for all regressed elements
-
-        ## update
-        with this method the function with the same name is called for all regressed elements
-
-        ## raise_click_event_press
-        with this method the function with the same name is called for all regressed elements
-
-        ## raise_click_event_release
-        this method calls the function with the same name for all regressed elements
-
-        ## getitem
-        You can access individual elements by accessing them with their ID:
-        gui_manager_object[element_id]
-        """
-        self.field_list = []
-        self.field_dict = {}
-        for field in fields:
-            self.field_list.append(field)
-            self.field_dict[field.ID] = field
-        self._mouse_pointer = mouse_pointer
-
-    def register(self, field):
-        """
-        use the register method to regress single elements. You can also pass an instance of
-        this manager either directly when creating the element from a predefined class or also
-        pass an instance at super.__init__ for your own classes that inherit from one of the predefined
-        classes. if you do one of the two above you don't have to use this method on the named object
-        or on all created objects of this class.
-        """
-        field.register_mouse(self._mouse_pointer)
-        self.field_list.append(field)
-        self.field_dict[field.ID] = field
-        dbg.debug(f"REGISTERED field: <\"{field.ID}\">")
-
-    def draw(self):
-        """
-        Draw all the elements
-        For more details please refer to the same method in the respective element
-        """
-        for field in self.field_list:
-            field.draw()
-
-    def update(self):
-        """
-        Update all elements
-        For more details please refer to the same method in the respective element
-        """
-        for field in self.field_list:
-            field.update_field()
-
-    def raise_click_event_press(self, button: int):
-        """
-        Trigger a mouse press event at each element
-        For more details please refer to the same method in the respective element
-
-        button: int the pressed button
-        """
-        dbg.info("MOUSE PRESS EVENT start iterating all fields")
-        for field in self.field_list:
-            field.raise_click_event_press(button)
-
-    def raise_click_event_release(self, button: int):
-        """
-        Trigger a mouse release event on each element
-        For more details please refer to the same method in the respective element
-
-        button: int the released button
-        """
-        dbg.info("MOUSE RELEASE EVENT start iterating all fields")
-        for field in self.field_list:
-            field.raise_click_event_release(button)
-
-    def __getitem__(self, name):
-        dbg.warning(f"USED GETITEM TO GET \"{name}\". THIS WILL BE REMOVED")
-        if name in self.field_dict:
-            return self.field_dict[name]
-        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
 class UIField:
-    def _find_center(self, pointA: Vector2D, pointC: Vector2D):
+    def _find_center(self, pointA: _Vector2D, pointC: _Vector2D):
         """
         Calculates the following values:
          - width (float) the width of this field
          - height (float) the height of this field
-         - size (Vector2D) it contains the width and height
+         - size (_Vector2D) it contains the width and height
 
          - center_x (float) the center position on x
          - center_y (float) the center position on y
-         - centerPos (Vector2D) it contains the center position
+         - centerPos (_Vector2D) it contains the center position
 
         Args:
-            pointA (Vector2D): The point from the fields upper left
-            pointC (Vector2D): The point from the fields lower right
+            pointA (_Vector2D): The point from the fields upper left
+            pointC (_Vector2D): The point from the fields lower right
         """
         self._width = pointA.valA - pointC.valA
         self._height = pointA.valB - pointC.valB
         self._half_width = self._width / 2
         self._half_height = self._height / 2
-        self._size = Vector2D(self._width, self._height)
+        self._size = _Vector2D(self._width, self._height)
 
         self._center_x = pointA.valA + self._half_width
         self._center_y = pointA.valB - self._half_height
-        self._centerPos = Vector2D(self._center_x, self._center_y)
-        dbg.info(f"FOUND CENTER: x: {self._center_x} y: {self._center_y}")
+        self._centerPos = _Vector2D(self._center_x, self._center_y)
+        dbg.info(f"FOUND CENTER: x: {self._center_x} y: {self._center_y}", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.POSITION_CHANGE], 'classname': self.__class__.__name__})
 
-    def _create_point_list(self, pointA: Vector2D, pointB: Vector2D, pointC: Vector2D, pointD: Vector2D):
+    def _create_point_list(self, pointA: _Vector2D, pointB: _Vector2D, pointC: _Vector2D, pointD: _Vector2D):
         """
         method to create the required point_list and point_list_raw
 
         Args:
-            pointA (Vector2D): The point from the fields upper left
-            pointB (Vector2D): The point from the fields upper right
-            pointC (Vector2D): The point from the fields lower right
-            pointD (Vector2D): The point from the fields lower left
+            pointA (_Vector2D): The point from the fields upper left
+            pointB (_Vector2D): The point from the fields upper right
+            pointC (_Vector2D): The point from the fields lower right
+            pointD (_Vector2D): The point from the fields lower left
 
         Returns:
             None
@@ -208,7 +51,7 @@ class UIField:
             return
         self._point_list_raw = [point.values for point in point_list]
         self._point_list = point_list
-        dbg.info("successfully built point list")
+        dbg.info("successfully built point list", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.POSITION_CHANGE], 'classname': self.__class__.__name__})
         self._find_center(pointA, pointC)
 
     def _init_values(self, id: str):
@@ -250,16 +93,16 @@ class UIField:
         #Check if its not already exists
         #so that it wont overwrite in future cases
         if not hasattr(self, "_mouse_pointer"):
-            dbg.warning("MOUSE POINTER MAY BE OVERWRITTEN")
+            dbg.warning("MOUSE POINTER MAY BE OVERWRITTEN", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self._mouse_pointer = None
 
-    def register_mouse(self, mouse: MousePointer):
+    def register_mouse(self, mouse: _MousePointer):
         """
         Register a mouse for all events that need mouse position.
         for example entering or leaving the field with it.
 
         Args:
-            mouse (MousePointer): An instance off the MousePointer class
+            mouse (_MousePointer): An instance off the _MousePointer class
         """
         self._mouse_pointer = mouse
 
@@ -267,17 +110,17 @@ class UIField:
         if ui_manager:
             ui_manager.register(self)
 
-    def __init__(self, id: str=None, *, pointA: Vector2D=None, pointB: Vector2D=None, pointC: Vector2D=None, pointD: Vector2D=None, ui_manager: UIManager=None, other_form:bool=False):
+    def __init__(self, id: str=None, *, pointA: _Vector2D=None, pointB: _Vector2D=None, pointC: _Vector2D=None, pointD: _Vector2D=None, ui_manager: UIManager=None, other_form:bool=False):
         """
         Create the default UIField. Its shape is a Rectangle, to create it you need to give four points and ab id for debugging.
         If you want that the Field registers automatically you can also give an instance from the class UIManager.
 
         Args:
             id (str): The ID of this field for debug uses
-            pointA (Vector2D): The point from the fields upper left
-            pointB (Vector2D): The point from the fields upper right
-            pointC (Vector2D): The point from the fields lower right
-            pointD (Vector2D): The point from the fields lower left
+            pointA (_Vector2D): The point from the fields upper left
+            pointB (_Vector2D): The point from the fields upper right
+            pointC (_Vector2D): The point from the fields lower right
+            pointD (_Vector2D): The point from the fields lower left
             ui_manager (UIManager, optional): If you want to register it automatically. Defaults to None.
             other_form (bool, optional): This is used internal. Defaults to False.
         """
@@ -302,14 +145,14 @@ class UIField:
         self._init_values(id)
         self._try_register(ui_manager)
 
-    def _position_over_field(self, position: Vector2D, *, pointA: Vector2D, pointC: Vector2D):
+    def _position_over_field(self, position: _Vector2D, *, pointA: _Vector2D, pointC: _Vector2D):
         """
         This method detects if the given position is in the given area/field
 
         Args:
-            position (Vector2D): The given position given as Vector2D or MousePointer
-            pointA (Vector2D): _description_
-            pointC (Vector2D): _description_
+            position (_Vector2D): The given position given as _Vector2D or _MousePointer
+            pointA (_Vector2D): _description_
+            pointC (_Vector2D): _description_
 
         Returns:
             bool True if the mouse is in the field
@@ -351,12 +194,12 @@ class UIField:
     def change_position_rel(self, dx: float=0, dy: float=0):
         self._point_list_raw.clear()
         for point in self._point_list:
-            point: Vector2D
+            point: _Vector2D
             point += dx, dy
             self._point_list_raw.append(point.values)
         self._find_center(self._point_list[0], self._point_list[2])
-        self.on_position_change(Vector2D(dx, dy))
-        dbg.info(f"CHANGED POS BY dx: {dx} dy: {dy} to x: {self._center_x} y: {self._center_y}")
+        self.on_position_change(_Vector2D(dx, dy))
+        dbg.info(f"CHANGED POS BY dx: {dx} dy: {dy} to x: {self._center_x} y: {self._center_y}", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.POSITION_CHANGE], 'classname': self.__class__.__name__})
 
     def update_field(self):
         """
@@ -378,11 +221,11 @@ class UIField:
         mouse_leaves_field, mouse_enters_field = self._get_flag_change(self._mouse_pointer_in_field, new_mouse_pointer_in_field)
 
         if mouse_enters_field and self._listen_for_mouse_enter_event: #mouse has entered the field
-            dbg.info(f"[{self._id} mouse has entered the field]")
+            dbg.info(f"[{self._id} mouse has entered the field]", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.EVENTS, _debugger_tags.MOUSE], 'classname': self.__class__.__name__})
             self.on_mouse_enters()
 
         if mouse_leaves_field and self._listen_for_mouse_leave_event: #mouse has left the field
-            dbg.info(f"[{self._id} mouse has left the field]")
+            dbg.info(f"[{self._id} mouse has left the field]", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.EVENTS, _debugger_tags.MOUSE], 'classname': self.__class__.__name__})
             self.on_mouse_leaves()
 
         #if none of the if statements above then the mouse is outside or is still in the field
@@ -442,7 +285,7 @@ class UIField:
             return
 
         if self._mouse_pointer_in_field: #mouse is in field
-            dbg.info(f"[{self._id} mouse has press on field]")
+            dbg.info(f"[{self._id} mouse has press on field]", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.EVENTS, _debugger_tags.MOUSE], 'classname': self.__class__.__name__})
             #set to true to detect later the release event even if mouse leaves the field
             self._mouse_press_on_field = True
             self.on_button_press(button)
@@ -476,7 +319,7 @@ class UIField:
             #the mouse button gets released in or outside the field
             #with self._mouse_pointer_in_field we check if the mouse is in the field
             #bzw if release_event_overwrite is True we realest the button outside the field
-            dbg.info(f"[{self._id} mouse has released the field]")
+            dbg.info(f"[{self._id} mouse has released the field]", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.EVENTS, _debugger_tags.MOUSE], 'classname': self.__class__.__name__})
             self.on_button_release(button)
             self._mouse_press_on_field = False
 
@@ -551,12 +394,12 @@ class UIField:
         This event gets called after this field gets updated
         """
 
-    def on_position_change(self, delta_position: Vector2D):
+    def on_position_change(self, delta_position: _Vector2D):
         """
         This event gets called after the position of this field changes
 
         Args:
-            delta_position (Vector2D): The change in Position Vector2D(dx, dy)
+            delta_position (_Vector2D): The change in Position _Vector2D(dx, dy)
         """
 
     def activate(self):
@@ -569,7 +412,7 @@ class UIField:
         self._field_active = True
         self.on_activate()
         self.on_visible()
-        dbg.warning(f"[{self._id}] got activated")
+        dbg.warning(f"[{self._id}] got activated", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
 
     def deactivate(self):
         """
@@ -581,7 +424,7 @@ class UIField:
         self._field_active = False
         self.on_deactivate()
         self.on_hide()
-        dbg.warning(f"[{self._id}] got deactivated")
+        dbg.warning(f"[{self._id}] got deactivated", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
 
     def set_visible(self, x: bool):
         """
@@ -591,10 +434,10 @@ class UIField:
         """
         show, hide = self._get_flag_change(self._field_visible, x)
         if hide:
-            dbg.warning.info(f"[{self._id}] invisible")
+            dbg.warning.info(f"[{self._id}] invisible", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self.on_hide()
         else:
-            dbg.warning.info(f"[{self._id}] visible")
+            dbg.warning.info(f"[{self._id}] visible", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self.on_visible()
         self._field_visible = x
 
@@ -607,20 +450,20 @@ class UIField:
         """
         deactivate, activate = self._get_flag_change(self._field_active, x)
         if activate:
-            dbg.warning.info(f"[{self._id}] activate")
+            dbg.warning.info(f"[{self._id}] activate", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self.on_activate()
         else:
-            dbg.warning(f"[{self._id}] deactivate")
+            dbg.warning(f"[{self._id}] deactivate", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self.on_deactivate()
         self._field_active = x
 
     def set_locked(self, x: bool):
         unlock, lock = self._get_flag_change(self._field_locked, x)
         if lock:
-            dbg.warning(f"[{self._id}] locked")
+            dbg.warning(f"[{self._id}] locked", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self.on_lock()
         else:
-            dbg.warning(f"[{self._id}] unlocked")
+            dbg.warning(f"[{self._id}] unlocked", extra={"tags": [_debugger_tags.M_FIELDS], 'classname': self.__class__.__name__})
             self.on_unlock()
         self._field_locked = x
         if x:
@@ -702,16 +545,16 @@ class RectButton(UIField):
         self._half_width = width/2
         self._half_height = height/2
 
-        point_a = Vector2D(center_x-self._half_width, center_y)
-        point_b = Vector2D(center_x+self._half_width, center_y)
-        point_c = Vector2D(center_x+self._half_width, center_y-self._half_height)
-        point_d = Vector2D(center_x-self._half_width, center_y-self._half_height)
+        point_a = _Vector2D(center_x-self._half_width, center_y)
+        point_b = _Vector2D(center_x+self._half_width, center_y)
+        point_c = _Vector2D(center_x+self._half_width, center_y-self._half_height)
+        point_d = _Vector2D(center_x-self._half_width, center_y-self._half_height)
         self._create_point_list(point_a, point_b, point_c, point_d)
 
         self._text_x = center_x-self._half_width+text_dx
         self._text_y = center_y-self._half_height+text_dy
 
-        self._centerPos = Vector2D(center_x, center_y)
+        self._centerPos = _Vector2D(center_x, center_y)
 
         dx = old_x - center_x
         dy = old_y - center_y
@@ -727,10 +570,10 @@ class RectButton(UIField):
         half_width = width / 2
         half_height = height / 2
 
-        point_a = Vector2D(center_x-half_width, center_y)
-        point_b = Vector2D(center_x+half_width, center_y)
-        point_c = Vector2D(center_x+half_width, center_y-half_height)
-        point_d = Vector2D(center_x-half_width, center_y-half_height)
+        point_a = _Vector2D(center_x-half_width, center_y)
+        point_b = _Vector2D(center_x+half_width, center_y)
+        point_c = _Vector2D(center_x+half_width, center_y-half_height)
+        point_d = _Vector2D(center_x-half_width, center_y-half_height)
         super().__init__(id, pointA=point_a, pointB=point_b, pointC=point_c, pointD=point_d)
 
         self.text = text
