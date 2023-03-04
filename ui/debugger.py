@@ -107,3 +107,5 @@ def test():
     logger.warning("!! Warning message !!", extra={})
     logger.error("Error message", extra={})
     logger.critical("Critical message", extra={})
+
+logger.debug("DEBUGGER MODULE LOADED", extra={"classname": ""})

@@ -152,6 +152,14 @@ class UIGroup(UIManager):
         for field in self.field_list:
             field.set_color_locked(c)
 
+    def change_position(self, x: float, y:float):
+        for field in self.field_list:
+            field.change_position(x, y)
+
+    def change_position_rel(self, dx: float, dy:float):
+        for field in self.field_list:
+            field.change_position_rel(dx, dy)
+
 
 class EventTemplate:
     def on_draw(self):
@@ -177,3 +185,5 @@ class EventTemplate:
     def on_mouse_enter(self, x: int, y: int):
         dbg.warning(f"MOUSE ENTERED ON POSITION {_Vector2D(x, y, 'entered')}", extra={"tags": [_debugger_tags.EVENTS, _debugger_tags.M_MANAGE, _debugger_tags.MOUSE], "classname": self.__class__.__name__})
         self.mouse_pointer.change(x, y)
+
+dbg.debug("MANAGE MODULE LOADED", extra={"classname": ""})

@@ -1,12 +1,49 @@
 from .utils import Vector2D as _Vector2D
 from .utils import MousePointer as _MousePointer
-from .manage import UIManager, UIGroup
+from .manage import UIManager as _UIManager
+from .manage import UIGroup as _UIGroup
 import arcade
 from .debugger import logger as dbg
 from .debugger import Tag as _debugger_tags
 
 
 class UIField:
+    def set_field(self, *, width: float=None, height: float=None, center_x: float=None, center_y: float=None, inherit: bool = False):
+        old_x = self._centerPos.valA
+        old_y = self._centerPos.valB
+
+        if width is None:
+            width = self._width
+        if height is None:
+            height = self._height
+        if center_x is None:
+            center_x = self._center_x
+        if center_y is None:
+            center_y = self._center_y
+
+        self._half_width = width/2
+        self._half_height = height/2
+
+        self._center_x = center_x
+        self._center_y = center_y
+
+        point_a = _Vector2D(center_x-self._half_width, center_y, "pointA")
+        point_b = _Vector2D(center_x+self._half_width, center_y, "pointB")
+        point_c = _Vector2D(center_x+self._half_width, center_y-self._half_height, "pointC")
+        point_d = _Vector2D(center_x-self._half_width, center_y-self._half_height, "pointD")
+        self._create_point_list(point_a, point_b, point_c, point_d)
+
+        self._centerPos = _Vector2D(center_x, center_y, "_centerPos")
+        self._size = _Vector2D(width, height, "_size")
+
+        dx = old_x - center_x
+        dy = old_y - center_y
+
+        if dx != 0 or dy != 0 and not inherit:
+            self.on_position_change(_Vector2D(dx, dy, "on_on_position_change_arg"))
+        else:
+            return dx, dy
+
     def _find_center(self, pointA: _Vector2D, pointC: _Vector2D):
         """
         Calculates the following values:
@@ -52,7 +89,6 @@ class UIField:
         self._point_list_raw = [point.values for point in point_list]
         self._point_list = point_list
         dbg.info("successfully built point list", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.POSITION_CHANGE], 'classname': self.__class__.__name__})
-        self._find_center(pointA, pointC)
 
     def _init_values(self, id: str):
         """
@@ -106,14 +142,14 @@ class UIField:
         """
         self._mouse_pointer = mouse
 
-    def _try_register(self, ui_manager: UIManager):
+    def _try_register(self, ui_manager: _UIManager):
         if ui_manager:
             ui_manager.register(self)
 
-    def __init__(self, id: str=None, *, pointA: _Vector2D=None, pointB: _Vector2D=None, pointC: _Vector2D=None, pointD: _Vector2D=None, ui_manager: UIManager=None, other_form:bool=False):
+    def __init__(self, id: str=None, *, pointA: _Vector2D=None, pointB: _Vector2D=None, pointC: _Vector2D=None, pointD: _Vector2D=None, ui_manager: _UIManager=None, other_form:bool=False):
         """
         Create the default UIField. Its shape is a Rectangle, to create it you need to give four points and ab id for debugging.
-        If you want that the Field registers automatically you can also give an instance from the class UIManager.
+        If you want that the Field registers automatically you can also give an instance from the class _UIManager.
 
         Args:
             id (str): The ID of this field for debug uses
@@ -121,7 +157,7 @@ class UIField:
             pointB (_Vector2D): The point from the fields upper right
             pointC (_Vector2D): The point from the fields lower right
             pointD (_Vector2D): The point from the fields lower left
-            ui_manager (UIManager, optional): If you want to register it automatically. Defaults to None.
+            ui_manager (_UIManager, optional): If you want to register it automatically. Defaults to None.
             other_form (bool, optional): This is used internal. Defaults to False.
         """
         if other_form: #used the alternative constructor
@@ -129,18 +165,19 @@ class UIField:
 
         self._init_values(id)
         self._create_point_list(pointA, pointB, pointC, pointD)
+        self._find_center(pointA, pointC)
         self._try_register(ui_manager)
 
-    def __init_other__(self, id: str, *, ui_manager: UIManager=None):
+    def __init_other__(self, id: str, *, ui_manager: _UIManager=None):
         """
         Use this if you want to create a UIField thats
         shaped differently then a Rectangle.
         Here you only need the id. You can also give an instance of
-        the UIManager class to register it.
+        the _UIManager class to register it.
 
         Args:
             id (str): The ID of this field for debug uses
-            ui_manager (UIManager, optional): If you want to register it automatically. Defaults to None.
+            ui_manager (_UIManager, optional): If you want to register it automatically. Defaults to None.
         """
         self._init_values(id)
         self._try_register(ui_manager)
@@ -515,6 +552,14 @@ class UIField:
     def MOUSE(self):
         return self._mouse_pointer
 
+    @property
+    def MOUSE_OVER_FIELD(self):
+        return self._mouse_pointer_in_field
+
+    @property
+    def MOUSE_PRESS_ON_FIELD(self):
+        return self._mouse_press_on_field
+
     def __str__(self) -> str:
         if not self.debug:
             return ""
@@ -526,48 +571,24 @@ class UIField:
 
 class RectButton(UIField):
     def set_field(self, *, width: float=None, height: float=None, center_x: float=None, center_y: float=None, text_dx: float=None, text_dy: float=None):
-        old_x = self._centerPos.valA
-        old_y = self._centerPos.valB
+        dx, dy = super().set_field(width=width, height=height, center_x=center_x, center_y=center_y, inherit=True)
 
-        if width is None:
-            width = self._width
-        if height is None:
-            height = self._height
-        if center_x is None:
-            center_x = self._center_x
-        if center_y is None:
-            center_y = self._center_y
         if text_dx is None:
             text_dx = self._text_dx
         if text_dy is None:
             text_dy = self._text_dy
 
-        self._half_width = width/2
-        self._half_height = height/2
-
-        point_a = _Vector2D(center_x-self._half_width, center_y, "pointA")
-        point_b = _Vector2D(center_x+self._half_width, center_y, "pointB")
-        point_c = _Vector2D(center_x+self._half_width, center_y-self._half_height, "pointC")
-        point_d = _Vector2D(center_x-self._half_width, center_y-self._half_height, "pointD")
-        self._create_point_list(point_a, point_b, point_c, point_d)
-
         self._text_x = center_x-self._half_width+text_dx
         self._text_y = center_y-self._half_height+text_dy
 
-        self._centerPos = _Vector2D(center_x, center_y, "_centerPos")
-        self._size = _Vector2D(width, height, "_size")
-
-        dx = old_x - center_x
-        dy = old_y - center_y
-
         if dx != 0 or dy != 0:
-            self.on_position_change(self._centerPos)
+            self.on_position_change(_Vector2D(dx, dy, "on_on_position_change_arg"))
 
     def _set_text_pos(self):
         self._text_x = self._center_x-self._half_width+self._text_dx
         self._text_y = self._center_y-self._half_height+self._text_dy
 
-    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, text: str, text_size: int, text_dx: float, text_dy: float, ui_manager: UIManager=None):
+    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, text: str, text_size: int, text_dx: float, text_dy: float, ui_manager: _UIManager=None):
         half_width = width / 2
         half_height = height / 2
 
@@ -598,13 +619,47 @@ class RectButton(UIField):
         super().draw()
         arcade.draw_text(self.text, self._text_x, self._text_y, font_size=self._text_size)
 
-class ScrollBar(UIField):
-    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, ui_manager: UIManager=None):
+
+class ScrollBar:
+    def __init__(self, id: str, *, center_x: float, center_y: float, width: float,
+                 height: float, thumb_bar_width: float, ui_manager: _UIManager=None):#,
+                 #scroll_group: _UIGroup, first_field: UIField, last_field: UIField):
         half_width = width / 2
         half_height = height / 2
 
-        point_a = _Vector2D(center_x-half_width, center_y, "pointA")
-        point_b = _Vector2D(center_x+half_width, center_y, "pointB")
-        point_c = _Vector2D(center_x+half_width, center_y-half_height, "pointC")
-        point_d = _Vector2D(center_x-half_width, center_y-half_height, "pointD")
-        super().__init__(id, pointA=point_a, pointB=point_b, pointC=point_c, pointD=point_d, ui_manager=ui_manager)
+        body_point_a = _Vector2D(center_x-half_width, center_y, "body_pointA")
+        body_point_b = _Vector2D(center_x+half_width, center_y, "body_pointB")
+        body_point_c = _Vector2D(center_x+half_width, center_y-half_height, "body_pointC")
+        body_point_d = _Vector2D(center_x-half_width, center_y-half_height, "body_pointD")
+
+        thumb_point_a = _Vector2D.copy(body_point_b, "thumb_point_a")
+        thumb_point_b = _Vector2D(body_point_b.valA + thumb_bar_width, body_point_b.valB, "thumb_point_b")
+        thumb_point_c = _Vector2D(body_point_c.valA + thumb_bar_width, body_point_c.valB, "thumb_point_c")
+        thumb_point_d = _Vector2D.copy(body_point_c, "thumb_point_d")
+
+        self._body = _scroll_bar_body(id+"#body", pointA=body_point_a, pointB=body_point_b, pointC=body_point_c, pointD=body_point_d, ui_manager=ui_manager, head=self)
+        self._thumb = _scroll_bar_thumb(id+"#thumb", pointA=thumb_point_a, pointB=thumb_point_b, pointC=thumb_point_c, pointD=thumb_point_d, ui_manager=ui_manager, head=self)
+        #self._first_field = first_field
+        #self._last_field = last_field
+
+class _scroll_bar_body(UIField):
+    def __init__(self, id: str = None, *, pointA: _Vector2D = None, pointB: _Vector2D = None, pointC: _Vector2D = None, pointD: _Vector2D = None, ui_manager: _UIManager = None, head: ScrollBar):
+        super().__init__(id, pointA=pointA, pointB=pointB, pointC=pointC, pointD=pointD, ui_manager=ui_manager)
+
+class _scroll_bar_thumb(UIField):
+    def __init__(self, id: str = None, *, pointA: _Vector2D = None, pointB: _Vector2D = None, pointC: _Vector2D = None, pointD: _Vector2D = None, ui_manager: _UIManager = None, head: ScrollBar):
+        super().__init__(id, pointA=pointA, pointB=pointB, pointC=pointC, pointD=pointD, ui_manager=ui_manager)
+        self._old_mouse_pos = _Vector2D.copy(self._mouse_pointer, "oldMousePos")
+        self.mouse_pressed = False
+
+    def on_button_press(self, button: int):
+        self.mouse_pressed = True
+
+    def on_button_release(self, button: int):
+        self.mouse_pressed = False
+
+    def on_update(self):
+        if self.mouse_pressed:
+            self.set_field(center_y=self._mouse_pointer.valB)
+
+dbg.debug("FIELDS MODULE LOADED", extra={"classname": ""})

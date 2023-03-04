@@ -15,6 +15,10 @@ class _BetterLog:
 
 
 class Vector2D(_BetterLog):
+    @classmethod
+    def copy(cls, other, new_id):
+        return cls(other.valA, other.valB, new_id)
+
     def __init__(self, a: float, b: float, id:str=None):
         """
         This Class represents a simple two dimensional Vector
@@ -77,3 +81,5 @@ class MousePointer(Vector2D):
     def change(self, a, b):
         self._a = a
         self._b = b
+
+dbg.debug("UTILS MODULE LOADED", extra={"classname": ""})
