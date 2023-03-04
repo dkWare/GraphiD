@@ -2735,3 +2735,390 @@
 2023-03-04 09:36:38,790 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
 2023-03-04 09:36:38,790 [INFO] [manage.UIGroup.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
 2023-03-04 09:39:16,509 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:40:50,910 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:41:16,656 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:52:32,333 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:52:32,713 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:52:32,714 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:52:32,714 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:52:32,714 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:52:32,714 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:52:32,715 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:52:32,715 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:52:32,715 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:52:32,715 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:52:32,716 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:52:32,716 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:53:07,889 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:53:08,203 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:53:08,203 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:53:08,203 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:53:08,204 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:53:08,204 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:53:08,204 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:53:08,204 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:53:08,205 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:53:08,205 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:53:08,205 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:53:08,205 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:53:13,606 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:14,977 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:16,159 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:16,582 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:16,934 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:17,239 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:17,876 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:18,288 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:18,289 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:18,682 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:18,682 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:19,159 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:19,160 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:19,575 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:19,575 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:19,965 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:19,966 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:20,276 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:20,276 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:20,356 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:20,875 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:21,352 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:21,352 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:21,723 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:21,723 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:21,919 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:22,675 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:23,284 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:23,284 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:23,596 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:23,596 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:23,991 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:25,367 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:25,957 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:25,957 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:26,391 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:26,391 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:26,662 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:27,370 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:27,759 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:28,078 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:28,095 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:28,230 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:28,246 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:28,380 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:28,430 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:28,597 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:28,665 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:28,698 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:28,848 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:28,898 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:28,915 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,033 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,083 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,201 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,218 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,302 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,319 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,403 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,420 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,486 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,502 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,570 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,586 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,670 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,687 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,771 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,787 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,821 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,871 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:29,921 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:29,955 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,005 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,038 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,089 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,122 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,172 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,223 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,240 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,290 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,339 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,356 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,441 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,458 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,608 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,624 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:30,842 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:30,859 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:34,286 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:34,451 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:34,452 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:35,158 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:35,159 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:35,525 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:35,525 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:38,677 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:38,678 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:41,246 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:41,246 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:41,472 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:41,473 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:41,607 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:41,607 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:41,660 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:41,660 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:41,781 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:41,782 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:41,850 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:41,850 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:41,948 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:41,949 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:42,046 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:42,046 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:42,135 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:53:42,136 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:53:42,232 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:53:42,232 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:53:42,663 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:43,368 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:43,436 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:43,504 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:43,788 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:43,889 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:43,906 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:44,040 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:44,291 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:44,560 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:44,609 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:44,961 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,028 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,045 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,195 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,295 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,328 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,379 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,513 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,579 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,596 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,664 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,698 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,798 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,848 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:45,965 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:45,998 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,066 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,182 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,266 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,366 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,449 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,568 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,634 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,668 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,735 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,751 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,835 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,852 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:46,919 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:46,952 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,035 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:47,153 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,203 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:47,236 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,269 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:47,336 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,403 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:47,503 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,586 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:47,687 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,753 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:47,870 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:47,937 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,055 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:48,120 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,237 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:48,288 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,338 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:48,473 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,589 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:48,656 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,773 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:48,857 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,924 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:48,958 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:48,974 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:49,075 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:49,109 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:49,562 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:50,067 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:53:50,521 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:53:50,571 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 09:54:29,047 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:54:29,329 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:54:29,330 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:54:29,330 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:54:29,330 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:54:29,331 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:54:29,331 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:54:29,331 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:54:29,331 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:54:29,331 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:54:29,332 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:54:29,332 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:54:31,180 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:54:31,576 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:54:31,576 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:54:32,311 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:54:32,311 [INFO] [fields.RectButton.raise_click_event_release:322] [BT_quit mouse has released the field]
+2023-03-04 09:54:53,999 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:54:54,299 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:54:54,299 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:54:54,299 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:54:54,299 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:54:54,299 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:54:54,300 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:54:54,300 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:54:54,300 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:54:54,300 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:54:54,300 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:54:54,300 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:54:56,008 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 09:54:56,317 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:54:56,318 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]
+2023-03-04 09:56:44,419 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:56:44,710 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:56:44,711 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:56:44,711 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:56:44,711 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:56:44,711 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:56:44,711 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:56:44,711 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:56:44,711 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:56:44,711 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:56:44,712 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:56:44,712 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:56:51,634 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:56:51,948 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:56:51,948 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:56:51,949 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:56:51,949 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:56:51,949 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:56:51,949 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:56:51,949 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:56:51,950 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:56:51,950 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:56:51,950 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:56:51,950 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:57:00,144 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:57:00,446 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:57:00,446 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:57:00,447 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:57:00,448 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:57:00,449 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:57:00,449 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:57:00,450 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:57:00,450 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:57:00,451 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:57:00,452 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:57:00,452 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:57:10,780 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:57:11,106 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:57:11,107 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:57:11,108 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:57:11,108 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:57:11,109 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:57:11,110 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:57:11,111 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:57:11,112 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:57:11,112 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:57:11,113 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:57:11,113 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 09:57:24,685 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 09:57:24,784 [INFO] [manage.UIManager.raise_click_event_release:99] MOUSE RELEASE EVENT start iterating all fields
+2023-03-04 09:57:32,632 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 09:57:32,901 [DEBUG] [utils.MousePointer.__init__:23] created Vector2D MousePointer(['a=0', 'b=0']
+2023-03-04 09:57:32,901 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=100']
+2023-03-04 09:57:32,901 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=100']
+2023-03-04 09:57:32,901 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=150.0', 'b=70.0']
+2023-03-04 09:57:32,902 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=50.0', 'b=70.0']
+2023-03-04 09:57:32,902 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 09:57:32,902 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 09:57:32,902 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=-100.0', 'b=30.0']
+2023-03-04 09:57:32,902 [DEBUG] [utils.Vector2D.__init__:23] created Vector2D Vector2D(['a=0.0', 'b=85.0']
+2023-03-04 09:57:32,902 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 09:57:32,902 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:03:19,132 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 10:03:19,435 [DEBUG] [utils.MousePointer.__init__:24] created Vector2D MousePointer(a=0, b=0, id=None
+2023-03-04 10:03:19,435 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=100, id=None
+2023-03-04 10:03:19,436 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=100, id=None
+2023-03-04 10:03:19,436 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=70.0, id=None
+2023-03-04 10:03:19,436 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=70.0, id=None
+2023-03-04 10:03:19,436 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 10:03:19,436 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 10:03:19,437 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=-100.0, b=30.0, id=None
+2023-03-04 10:03:19,437 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=0.0, b=85.0, id=None
+2023-03-04 10:03:19,437 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 10:03:19,437 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:03:50,243 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 10:03:50,523 [DEBUG] [utils.MousePointer.__init__:24] created Vector2D MousePointer(a=0, b=0
+2023-03-04 10:03:50,524 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=100
+2023-03-04 10:03:50,524 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=100
+2023-03-04 10:03:50,524 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=70.0
+2023-03-04 10:03:50,525 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=70.0
+2023-03-04 10:03:50,525 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 10:03:50,525 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 10:03:50,525 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=-100.0, b=30.0
+2023-03-04 10:03:50,526 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=0.0, b=85.0
+2023-03-04 10:03:50,526 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 10:03:50,526 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:04:06,188 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 10:04:06,494 [DEBUG] [utils.MousePointer.__init__:24] created Vector2D MousePointer(a=0, b=0)
+2023-03-04 10:04:06,495 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=100)
+2023-03-04 10:04:06,495 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=100)
+2023-03-04 10:04:06,496 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=70.0)
+2023-03-04 10:04:06,496 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=70.0)
+2023-03-04 10:04:06,496 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 10:04:06,496 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 10:04:06,497 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=-100.0, b=30.0)
+2023-03-04 10:04:06,497 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=0.0, b=85.0)
+2023-03-04 10:04:06,497 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 10:04:06,497 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:08:29,743 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 10:08:30,060 [DEBUG] [utils.MousePointer.__init__:24] created Vector2D MousePointer(a=0, b=0)
+2023-03-04 10:08:30,061 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=100, id=pointA)
+2023-03-04 10:08:30,061 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=100, id=pointB)
+2023-03-04 10:08:30,061 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=150.0, b=70.0, id=pointC)
+2023-03-04 10:08:30,061 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=50.0, b=70.0, id=pointD)
+2023-03-04 10:08:30,062 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 10:08:30,062 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 10:08:30,062 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=-100.0, b=30.0, id=size)
+2023-03-04 10:08:30,062 [DEBUG] [utils.Vector2D.__init__:24] created Vector2D Vector2D(a=0.0, b=85.0, id=centerPos)
+2023-03-04 10:08:30,062 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 10:08:30,062 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:10:14,365 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 10:10:14,671 [DEBUG] [utils.MousePointer.__init__:36] created Vector2D MousePointer(a=0, b=0)
+2023-03-04 10:10:14,671 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=50.0, b=100, id=pointA)
+2023-03-04 10:10:14,671 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=150.0, b=100, id=pointB)
+2023-03-04 10:10:14,671 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=150.0, b=70.0, id=pointC)
+2023-03-04 10:10:14,672 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=50.0, b=70.0, id=pointD)
+2023-03-04 10:10:14,672 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 10:10:14,672 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 10:10:14,672 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=-100.0, b=30.0, id=size)
+2023-03-04 10:10:14,672 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=0.0, b=85.0, id=centerPos)
+2023-03-04 10:10:14,673 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 10:10:14,673 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:11:47,432 [CRITICAL] [manage..<module>:9] importing _UIField skipped
+2023-03-04 10:11:47,734 [DEBUG] [utils.MousePointer.__init__:36] created Vector2D MousePointer(a=0, b=0)
+2023-03-04 10:11:47,734 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=50.0, b=100, id=pointA)
+2023-03-04 10:11:47,735 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=150.0, b=100, id=pointB)
+2023-03-04 10:11:47,735 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=150.0, b=70.0, id=pointC)
+2023-03-04 10:11:47,735 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=50.0, b=70.0, id=pointD)
+2023-03-04 10:11:47,735 [WARNING] [fields.RectButton._init_values:96] MOUSE POINTER MAY BE OVERWRITTEN
+2023-03-04 10:11:47,735 [INFO] [fields.RectButton._create_point_list:54] successfully built point list
+2023-03-04 10:11:47,735 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=-100.0, b=30.0, id=size)
+2023-03-04 10:11:47,736 [DEBUG] [utils.Vector2D.__init__:36] created Vector2D Vector2D(a=0.0, b=85.0, id=centerPos)
+2023-03-04 10:11:47,736 [INFO] [fields.RectButton._find_center:34] FOUND CENTER: x: 0.0 y: 85.0
+2023-03-04 10:11:47,736 [DEBUG] [manage.UIManager.register:60] REGISTERED field: <"BT_quit">
+2023-03-04 10:11:52,359 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 10:11:53,284 [INFO] [fields.RectButton.update_field:228] [BT_quit mouse has left the field]
+2023-03-04 10:11:53,703 [INFO] [fields.RectButton.update_field:224] [BT_quit mouse has entered the field]
+2023-03-04 10:11:54,475 [INFO] [manage.UIManager.raise_click_event_press:88] MOUSE PRESS EVENT start iterating all fields
+2023-03-04 10:11:54,475 [INFO] [fields.RectButton.raise_click_event_press:288] [BT_quit mouse has press on field]

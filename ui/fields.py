@@ -26,11 +26,11 @@ class UIField:
         self._height = pointA.valB - pointC.valB
         self._half_width = self._width / 2
         self._half_height = self._height / 2
-        self._size = _Vector2D(self._width, self._height)
+        self._size = _Vector2D(self._width, self._height, "_size")
 
         self._center_x = pointA.valA + self._half_width
         self._center_y = pointA.valB - self._half_height
-        self._centerPos = _Vector2D(self._center_x, self._center_y)
+        self._centerPos = _Vector2D(self._center_x, self._center_y, "_centerPos")
         dbg.info(f"FOUND CENTER: x: {self._center_x} y: {self._center_y}", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.POSITION_CHANGE], 'classname': self.__class__.__name__})
 
     def _create_point_list(self, pointA: _Vector2D, pointB: _Vector2D, pointC: _Vector2D, pointD: _Vector2D):
@@ -198,7 +198,7 @@ class UIField:
             point += dx, dy
             self._point_list_raw.append(point.values)
         self._find_center(self._point_list[0], self._point_list[2])
-        self.on_position_change(_Vector2D(dx, dy))
+        self.on_position_change(_Vector2D(dx, dy, "on_position_change_arg"))
         dbg.info(f"CHANGED POS BY dx: {dx} dy: {dy} to x: {self._center_x} y: {self._center_y}", extra={"tags": [_debugger_tags.M_FIELDS, _debugger_tags.POSITION_CHANGE], 'classname': self.__class__.__name__})
 
     def update_field(self):
@@ -545,16 +545,17 @@ class RectButton(UIField):
         self._half_width = width/2
         self._half_height = height/2
 
-        point_a = _Vector2D(center_x-self._half_width, center_y)
-        point_b = _Vector2D(center_x+self._half_width, center_y)
-        point_c = _Vector2D(center_x+self._half_width, center_y-self._half_height)
-        point_d = _Vector2D(center_x-self._half_width, center_y-self._half_height)
+        point_a = _Vector2D(center_x-self._half_width, center_y, "pointA")
+        point_b = _Vector2D(center_x+self._half_width, center_y, "pointB")
+        point_c = _Vector2D(center_x+self._half_width, center_y-self._half_height, "pointC")
+        point_d = _Vector2D(center_x-self._half_width, center_y-self._half_height, "pointD")
         self._create_point_list(point_a, point_b, point_c, point_d)
 
         self._text_x = center_x-self._half_width+text_dx
         self._text_y = center_y-self._half_height+text_dy
 
-        self._centerPos = _Vector2D(center_x, center_y)
+        self._centerPos = _Vector2D(center_x, center_y, "_centerPos")
+        self._size = _Vector2D(width, height, "_size")
 
         dx = old_x - center_x
         dy = old_y - center_y
@@ -570,10 +571,10 @@ class RectButton(UIField):
         half_width = width / 2
         half_height = height / 2
 
-        point_a = _Vector2D(center_x-half_width, center_y)
-        point_b = _Vector2D(center_x+half_width, center_y)
-        point_c = _Vector2D(center_x+half_width, center_y-half_height)
-        point_d = _Vector2D(center_x-half_width, center_y-half_height)
+        point_a = _Vector2D(center_x-half_width, center_y, "pointA")
+        point_b = _Vector2D(center_x+half_width, center_y, "pointB")
+        point_c = _Vector2D(center_x+half_width, center_y-half_height, "pointC")
+        point_d = _Vector2D(center_x-half_width, center_y-half_height, "pointD")
         super().__init__(id, pointA=point_a, pointB=point_b, pointC=point_c, pointD=point_d)
 
         self.text = text
