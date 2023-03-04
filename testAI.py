@@ -189,5 +189,3 @@ class TicTacToe(arcade.Window):
 
     def run(self):
         arcade.run()
-
-TicTacToe().run()

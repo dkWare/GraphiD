@@ -567,7 +567,7 @@ class RectButton(UIField):
         self._text_x = self._center_x-self._half_width+self._text_dx
         self._text_y = self._center_y-self._half_height+self._text_dy
 
-    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, text: str, text_size: int, text_dx: float, text_dy: float, ui_manager: UIManager=None, release_event_outside_field:bool=False):
+    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, text: str, text_size: int, text_dx: float, text_dy: float, ui_manager: UIManager=None):
         half_width = width / 2
         half_height = height / 2
 
@@ -597,3 +597,14 @@ class RectButton(UIField):
 
         super().draw()
         arcade.draw_text(self.text, self._text_x, self._text_y, font_size=self._text_size)
+
+class ScrollBar(UIField):
+    def __init__(self, id: str, *, center_x: float, center_y: float, width: float, height: float, ui_manager: UIManager=None):
+        half_width = width / 2
+        half_height = height / 2
+
+        point_a = _Vector2D(center_x-half_width, center_y, "pointA")
+        point_b = _Vector2D(center_x+half_width, center_y, "pointB")
+        point_c = _Vector2D(center_x+half_width, center_y-half_height, "pointC")
+        point_d = _Vector2D(center_x-half_width, center_y-half_height, "pointD")
+        super().__init__(id, pointA=point_a, pointB=point_b, pointC=point_c, pointD=point_d, ui_manager=ui_manager)

@@ -151,3 +151,29 @@ class UIGroup(UIManager):
     def set_color_locked(self, c: arcade.Color):
         for field in self.field_list:
             field.set_color_locked(c)
+
+
+class EventTemplate:
+    def on_draw(self):
+        arcade.start_render()
+        self.gui_manager.draw()
+
+    def on_update(self, delta_time):
+        self.gui_manager.update()
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        self.mouse_pointer.change(x, y)
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        self.gui_manager.raise_click_event_press(button)
+
+    def on_mouse_release(self, x, y, button, modifiers):
+        self.gui_manager.raise_click_event_release(button)
+
+    def on_mouse_leave(self, x: int, y: int):
+        dbg.warning(f"MOUSE LEFT ON POSITION {_Vector2D(x, y, 'left')}", extra={"tags": [_debugger_tags.EVENTS, _debugger_tags.M_MANAGE, _debugger_tags.MOUSE], "classname": self.__class__.__name__})
+        self.mouse_pointer.change(-100, -100)
+
+    def on_mouse_enter(self, x: int, y: int):
+        dbg.warning(f"MOUSE ENTERED ON POSITION {_Vector2D(x, y, 'entered')}", extra={"tags": [_debugger_tags.EVENTS, _debugger_tags.M_MANAGE, _debugger_tags.MOUSE], "classname": self.__class__.__name__})
+        self.mouse_pointer.change(x, y)

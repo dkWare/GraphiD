@@ -94,7 +94,7 @@ filter = TagFilter()
 handler.addFilter(filter)  # add any tags you want to filter on here
 
 # Add a file handler to the logger
-file_handler = logging.FileHandler('log.txt')
+file_handler = logging.FileHandler('test_data/log.txt')
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(logging.Formatter(FORMAT_FILE))
 logger.addHandler(file_handler)
