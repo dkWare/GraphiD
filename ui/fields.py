@@ -292,12 +292,14 @@ class UIField:
         if not self._field_visible: #the field is not visible
             return
 
-        if self._field_locked: #field is locked
+        color = self._color_unmasked
+        if self._field_locked:
             color = self._color_field_locked
-        elif self._mouse_press_on_field: #field is being pressed
+        elif self._mouse_press_on_field:
             color = self._color_pressed
-        else: #mark field so that its unmarked or marked
-            color = self._color_unmasked if not self._mouse_pointer_in_field and not self._mouse_click_visual_overwrite else self._color_masked
+        elif self._mouse_pointer_in_field or self._mouse_click_visual_overwrite:
+            color = self._color_masked
+
         arcade.draw_polygon_filled(self._point_list_raw, color)
 
         if not self.debug:

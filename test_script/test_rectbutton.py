@@ -78,7 +78,6 @@ class ChatWindow(arcade.Window):
             button.activate()
 
     def on_draw(self):
-        self.clear()
         self.gui_manager.draw()
 
     def on_update(self, delta_time: float):

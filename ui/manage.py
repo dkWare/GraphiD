@@ -162,21 +162,25 @@ class UIGroup(UIManager):
 
 
 class EventTemplate:
+    @staticmethod
+    def init(child):
+        child.mouse_pointer = _MousePointer(-100, -100, "mainMousePointer")
+        child.ui_manager = UIManager(child.mouse_pointer)
+
     def on_draw(self):
-        arcade.start_render()
-        self.gui_manager.draw()
+        self.ui_manager.draw()
 
     def on_update(self, delta_time):
-        self.gui_manager.update()
+        self.ui_manager.update()
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.mouse_pointer.change(x, y)
 
     def on_mouse_press(self, x, y, button, modifiers):
-        self.gui_manager.raise_click_event_press(button)
+        self.ui_manager.raise_click_event_press(button)
 
     def on_mouse_release(self, x, y, button, modifiers):
-        self.gui_manager.raise_click_event_release(button)
+        self.ui_manager.raise_click_event_release(button)
 
     def on_mouse_leave(self, x: int, y: int):
         dbg.warning(f"MOUSE LEFT ON POSITION {_Vector2D(x, y, 'left')}", extra={"tags": [_debugger_tags.EVENTS, _debugger_tags.M_MANAGE, _debugger_tags.MOUSE], "classname": self.__class__.__name__})
