@@ -1,6 +1,6 @@
 import arcade
 import cProfile
-import ui
+import GraphiD as ui
 
 
 class Button(ui.RectButton):

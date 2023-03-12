@@ -1,5 +1,5 @@
 import arcade
-import ui
+import GraphiD as ui
 import cProfile
 
 

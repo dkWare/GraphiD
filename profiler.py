@@ -1,4 +1,4 @@
-from ui.debugger import logger as dbg
+from GraphiD.debugger import logger as dbg
 dbg.debug("LOAD INTERN MODULES", extra={'classname': ''})
 
 import colorama
@@ -80,7 +80,6 @@ def chose_profiling_target() -> str:
         profiling_target_split = profile_target_function.split(".", 1)
         if "" in profiling_target_split:
             profiling_target_split.remove("")
-        print(profiling_target_split)
 
         if len(profiling_target_split) != 2:
             dbg.error(f"check your target function, there might be an syntax error: {profile_target_function}", extra={'classname':''})
@@ -112,10 +111,14 @@ def chose_profiling_target() -> str:
             continue
 
         if not profile_target_function.endswith("()"):
-            dbg.warning(f"your not calling the target function, this still profiles something but its very likely that that is not what you want.\nenter anything to change it or leave it plank to continue!:\currently: {profile_target_function}", extra={'classname':''})
+            dbg.warning(f"your not calling the target function, this still profiles something but its very likely that that is not what you want.\nenter anything to change it or leave it plank to continue!:\nadd #+ to the begin to only add something to the target\ncurrently: {profile_target_function}", extra={'classname':''})
             overwrite = color_input("change: ")
             if overwrite != "":
-                profile_target_function = overwrite+"#overwrite"
+                if overwrite.startswith("#+"):
+                    profile_target_function += overwrite.removeprefix("#+")
+                else:
+                    profile_target_function = overwrite
+                profile_target_function += "#overwrite"
                 continue
         return profile_target_function, profiling_target_module
 

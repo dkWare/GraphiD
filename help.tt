@@ -1,0 +1,47 @@
+Unary operators:
+
+__neg__: -x
+__pos__: +x
+__abs__: abs(x)
+__invert__: ~x
+Binary arithmetic operators:
+
+__add__: x + y
+__sub__: x - y
+__mul__: x * y
+__truediv__: x / y
+__floordiv__: x // y
+__mod__: x % y
+__divmod__: divmod(x, y)
+__pow__: x ** y
+Augmented assignment operators:
+
+__iadd__: x += y
+__isub__: x -= y
+__imul__: x *= y
+__itruediv__: x /= y
+__ifloordiv__: x //= y
+__imod__: x %= y
+__ipow__: x **= y
+Comparison operators:
+
+__lt__: x < y
+__le__: x <= y
+__eq__: x == y
+__ne__: x != y
+__gt__: x > y
+__ge__: x >= y
+Container and membership operators:
+
+__len__: len(x)
+__getitem__: x[y]
+__setitem__: x[y] = v
+__delitem__: del x[y]
+__contains__: y in x
+String conversion and formatting:
+
+__str__: str(x)
+__repr__: repr(x)
+__format__: format(x)
+__bytes__: bytes(x)
+__unicode__: unicode(x)

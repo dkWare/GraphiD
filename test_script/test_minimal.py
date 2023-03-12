@@ -1,4 +1,4 @@
-import ui
+import GraphiD as ui
 import arcade
 import cProfile
 
